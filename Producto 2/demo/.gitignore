@@ -1,0 +1,14 @@
+# Maven
+target/
+*.class
+*.jar
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Windows
+Thumbs.db
+Desktop.ini
