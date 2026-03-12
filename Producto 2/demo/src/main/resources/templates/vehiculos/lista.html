@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Vehículos')}"></head>
+<body class="page">
+
+<div th:replace="~{fragments/layout :: navbar}" th:with="activePage='vehiculos'"></div>
+
+<main class="main">
+    <div class="page-header">
+        <div>
+            <div class="page-title">Vehículos</div>
+            <div class="page-subtitle">Gestión del catálogo de vehículos disponibles</div>
+        </div>
+        <a th:href="@{/vehiculos/new}" class="btn btn-primary">
+            <span class="material-icons">add</span> Añadir Vehículo
+        </a>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Marca y Modelo</th>
+                <th>Matrícula</th>
+                <th>Año</th>
+                <th>Precio / día</th>
+                <th>Estado</th>
+                <th>Gestión</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="vehiculo : ${vehiculos}">
+                <td>
+                        <span class="material-icons"
+                              th:text="${vehiculo.tipo.name() == 'COCHE'} ? 'directions_car' :
+                                       (${vehiculo.tipo.name() == 'MOTO'} ? 'two_wheeler' : 'airport_shuttle')">
+                        </span>
+                </td>
+                <td th:text="${vehiculo.marca + ' ' + vehiculo.modelo}"></td>
+                <td><strong th:text="${vehiculo.matricula}"></strong></td>
+                <td class="td-secondary" th:text="${vehiculo.anio}"></td>
+                <td><strong th:text="${vehiculo.precioDia + '€'}"></strong></td>
+                <td>
+                        <span th:class="${vehiculo.estado.name() == 'DISPONIBLE'} ? 'badge badge-success' :
+                                        (${vehiculo.estado.name() == 'ALQUILADO'} ? 'badge badge-rented' : 'badge badge-attention')"
+                              th:text="${vehiculo.estado.name() == 'DISPONIBLE'} ? 'Disponible' :
+                                       (${vehiculo.estado.name() == 'ALQUILADO'} ? 'Alquilado' : 'Mantenimiento')">
+                        </span>
+                </td>
+                <td>
+                    <div class="actions">
+                        <a th:href="@{/vehiculos/{id}/edit(id=${vehiculo.id})}" class="btn btn-outline btn-sm">Editar</a>
+                        <a th:href="@{/vehiculos/{id}/delete(id=${vehiculo.id})}" class="btn-danger btn-sm">
+                            <span class="material-icons">delete</span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Vehículo')}"></head>
+<body class="page">
+
+<div th:replace="~{fragments/layout :: navbar}" th:with="activePage='vehiculos'"></div>
+
+<main class="main">
+    <div class="breadcrumb">
+        <a th:href="@{/vehiculos}">Vehículos</a>
+        <span class="sep">›</span>
+        <span class="current" th:text="${vehiculo.id} ? 'Editar vehículo' : 'Nuevo vehículo'"></span>
+    </div>
+
+    <div class="page-header">
+        <div>
+            <div class="page-title" th:text="${vehiculo.id} ? 'Editar Vehículo' : 'Nuevo Vehículo'"></div>
+            <div class="page-subtitle" th:text="${vehiculo.id} ?
+                'Modifica los datos del vehículo' :
+                'Rellena los datos para añadir un vehículo al catálogo'"></div>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <div class="form-card-header">
+            <h2>Datos del vehículo</h2>
+        </div>
+        <div class="form-card-body">
+            <form th:action="@{/vehiculos/save}" th:object="${vehiculo}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Matrícula</label>
+                        <input type="text" th:field="*{matricula}" placeholder="Ej: 1234 ABC"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo</label>
+                        <select th:field="*{tipo}">
+                            <option value="">Selecciona un tipo</option>
+                            <option th:each="tipo : ${tipos}"
+                                    th:value="${tipo}"
+                                    th:text="${tipo}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Marca</label>
+                        <input type="text" th:field="*{marca}" placeholder="Ej: Toyota"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Modelo</label>
+                        <input type="text" th:field="*{modelo}" placeholder="Ej: Corolla"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Año</label>
+                        <input type="number" th:field="*{anio}" placeholder="Ej: 2022"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Precio / día (€)</label>
+                        <input type="number" step="0.01" th:field="*{precioDia}" placeholder="Ej: 42"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select th:field="*{estado}">
+                            <option value="">Selecciona un estado</option>
+                            <option th:each="estado : ${estados}"
+                                    th:value="${estado}"
+                                    th:text="${estado}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="material-icons">save</span> Guardar vehículo
+                    </button>
+                    <a th:href="@{/vehiculos}" class="btn btn-outline">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

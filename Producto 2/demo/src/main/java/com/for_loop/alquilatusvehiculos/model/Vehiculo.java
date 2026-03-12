@@ -27,10 +27,10 @@ public class Vehiculo {
     private TipoVehiculo tipo;
 
     @Column(nullable = false)
-    private Integer anio;
+    private int anio;
 
     @Column(nullable = false)
-    private Double precioDia;
+    private double precioDia;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
