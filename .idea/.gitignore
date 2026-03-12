@@ -10,3 +10,4 @@
 /httpRequests/
 # Videos de la asignatura
 /videos_youtube/
+*.mp4
