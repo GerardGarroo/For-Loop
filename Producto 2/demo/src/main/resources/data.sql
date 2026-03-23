@@ -21,3 +21,9 @@ INSERT INTO alquileres (fecha_inicio, fecha_fin, precio_total, estado, cliente_i
 ('2026-03-11', '2026-03-17', 252.00, 'PENDIENTE', 2, 2, 3, 2),
 ('2026-03-01', '2026-03-08', 280.00, 'FINALIZADO', 3, 4, 1, 1),
 ('2026-03-13', '2026-03-16', 105.00, 'PENDIENTE', 2, 4, 1, 2);
+
+-- Añadimos esto para que no genere errores al guardar archivos que conicidan con los datos mock
+ALTER TABLE vehiculos ALTER COLUMN id RESTART WITH 10;
+ALTER TABLE clientes ALTER COLUMN id RESTART WITH 10;
+ALTER TABLE sedes ALTER COLUMN id RESTART WITH 10;
+ALTER TABLE alquileres ALTER COLUMN id RESTART WITH 10;
