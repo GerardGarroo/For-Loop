@@ -11,7 +11,7 @@
             <div class="page-title">Vehículos</div>
             <div class="page-subtitle">Gestión del catálogo de vehículos disponibles</div>
         </div>
-        <a th:href="@{/vehiculos/new}" class="btn btn-primary">
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/vehiculos/new}" class="btn btn-primary">
             <span class="material-icons">add</span> Añadir Vehículo
         </a>
     </div>
@@ -26,7 +26,7 @@
                 <th>Año</th>
                 <th>Precio / día</th>
                 <th>Estado</th>
-                <th>Gestión</th>
+                <th sec:authorize="hasRole('ADMIN')">Gestión</th>
             </tr>
             </thead>
             <tbody>
@@ -48,10 +48,10 @@
                                        (${vehiculo.estado.name() == 'ALQUILADO'} ? 'Alquilado' : 'Mantenimiento')">
                         </span>
                 </td>
-                <td>
+                <td sec:authorize="hasRole('ADMIN')">
                     <div class="actions">
-                        <a th:href="@{/vehiculos/{id}/edit(id=${vehiculo.id})}" class="btn btn-outline btn-sm">Editar</a>
-                        <a th:href="@{/vehiculos/{id}/delete(id=${vehiculo.id})}" class="btn-danger btn-sm">
+                        <a th:href="@{/admin/vehiculos/{id}/edit(id=${vehiculo.id})}" class="btn btn-outline btn-sm">Editar</a>
+                        <a th:href="@{/admin/vehiculos/{id}/delete(id=${vehiculo.id})}" class="btn-danger btn-sm">
                             <span class="material-icons">delete</span>
                         </a>
                     </div>

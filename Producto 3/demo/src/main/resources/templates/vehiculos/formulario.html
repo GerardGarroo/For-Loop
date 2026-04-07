@@ -26,7 +26,7 @@
             <h2>Datos del vehículo</h2>
         </div>
         <div class="form-card-body">
-            <form th:action="@{/vehiculos/save}" th:object="${vehiculo}" method="post">
+            <form th:action="@{/admin/vehiculos/save}" th:object="${vehiculo}" method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="form-grid">
                     <div class="form-group">

@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/vehiculos")
 public class VehiculoController {
 
     private final VehiculoRepository vehiculoRepository;
@@ -17,14 +16,14 @@ public class VehiculoController {
     }
 
     // LISTAR
-    @GetMapping
+    @GetMapping("/vehiculos")
     public String listar(Model model) {
         model.addAttribute("vehiculos", vehiculoRepository.findAll());
         return "vehiculos/lista";
     }
 
     // MOSTRAR FORMULARIO NUEVO
-    @GetMapping("/new")
+    @GetMapping("/admin/vehiculos/new")
     public String mostrarFormularioNuevo(Model model) {
         model.addAttribute("vehiculo", new Vehiculo());
         model.addAttribute("tipos", Vehiculo.TipoVehiculo.values());
@@ -33,7 +32,7 @@ public class VehiculoController {
     }
 
     // MOSTRAR FORMULARIO EDITAR
-    @GetMapping("/{id}/edit")
+    @GetMapping("/admin/vehiculos/{id}/edit")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
         Vehiculo vehiculo = vehiculoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Vehiculo no encontrado"));
@@ -44,14 +43,14 @@ public class VehiculoController {
     }
 
     // GUARDAR
-    @PostMapping("/save")
+    @PostMapping("/admin/vehiculos/save")
     public String guardar(@ModelAttribute Vehiculo vehiculo) {
         vehiculoRepository.save(vehiculo);
         return "redirect:/vehiculos";
     }
 
     // BORRAR
-    @GetMapping("/{id}/delete")
+    @GetMapping("/admin/vehiculos/{id}/delete")
     public String borrar(@PathVariable Long id) {
         vehiculoRepository.deleteById(id);
         return "redirect:/vehiculos";

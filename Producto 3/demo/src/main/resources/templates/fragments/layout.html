@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,7 +19,23 @@
             <a th:href="@{/sedes}" th:classappend="${activePage == 'sedes'} ? 'active'">Sedes</a>
             <a th:href="@{/alquileres}" th:classappend="${activePage == 'alquileres'} ? 'active'">Alquileres</a>
         </nav>
-        <div class="avatar"><div class="avatar-dot"></div></div>
+        <!-- Opciones de Usuario / Login -->
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <div sec:authorize="isAuthenticated()" style="display: flex; align-items: center; gap: 12px;">
+                <div class="avatar" style="position:relative;">
+                    <div class="avatar-dot" style="background:#22c55e;"></div>
+                </div>
+                <span style="font-weight: 500; font-size: 14px; color: #334155;">Hola, <span sec:authentication="name">Usuario</span></span>
+                <form th:action="@{/logout}" method="post" style="margin: 0;">
+                    <button type="submit" class="btn btn-outline btn-sm" style="padding: 6px 12px;">Cerrar Sesión</button>
+                </form>
+            </div>
+            
+            <div sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}" class="btn btn-primary btn-sm" style="padding: 6px 12px; margin-right: 4px;">Login</a>
+                <a th:href="@{/register}" class="btn btn-outline btn-sm" style="padding: 6px 12px;">Registrarse</a>
+            </div>
+        </div>
     </header>
 </nav>
 
