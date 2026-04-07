@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${title}">AlquilaTusVehiculos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+</head>
+<body>
+
+<nav th:fragment="navbar">
+    <header class="header">
+        <div class="logo">¡AtV!<span class="logo-sub">¡Alquila tus vehículos!</span></div>
+        <nav class="nav">
+            <a th:href="@{/vehiculos}" th:classappend="${activePage == 'vehiculos'} ? 'active'">Vehículos</a>
+            <a th:href="@{/clientes}" th:classappend="${activePage == 'clientes'} ? 'active'">Clientes</a>
+            <a th:href="@{/sedes}" th:classappend="${activePage == 'sedes'} ? 'active'">Sedes</a>
+            <a th:href="@{/alquileres}" th:classappend="${activePage == 'alquileres'} ? 'active'">Alquileres</a>
+        </nav>
+        <div class="avatar"><div class="avatar-dot"></div></div>
+    </header>
+</nav>
+
+<footer th:fragment="footer">
+    <div class="footer">
+        <span>@For-loop *2026</span>
+    </div>
+</footer>
+
+</body>
+</html>
