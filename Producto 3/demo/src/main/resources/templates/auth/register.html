@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Registro')}"></head>
+<body class="page">
+<div th:replace="~{fragments/layout :: navbar}"></div>
+
+<main class="main" style="display:flex; justify-content:center; align-items:center; min-height:80vh;">
+    <div style="background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); width: 100%; max-width: 400px;">
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 600; text-align:center; margin-top:0;">Crear Cuenta</h2>
+        <p style="color:#64748b; text-align:center; margin-bottom: 2rem;">Únete a ¡Alquila tus vehículos!</p>
+
+        <form th:action="@{/register}" th:object="${usuario}" method="post">
+            <div style="margin-bottom: 1rem;">
+                <label for="username" style="display:block; font-size: 14px; font-weight: 500; color: #334155; margin-bottom: 8px;">Usuario</label>
+                <input type="text" id="username" th:field="*{username}" class="form-input" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box;" required autofocus/>
+            </div>
+            <div style="margin-bottom: 2rem;">
+                <label for="password" style="display:block; font-size: 14px; font-weight: 500; color: #334155; margin-bottom: 8px;">Contraseña</label>
+                <input type="password" id="password" th:field="*{password}" class="form-input" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box;" required/>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; font-size: 16px;">Registrarse</button>
+        </form>
+        
+        <p style="text-align:center; margin-top: 1.5rem; font-size: 14px; color: #64748b;">
+            ¿Ya tienes cuenta? <a th:href="@{/login}" style="color: #6366f1; font-weight: 500; text-decoration: none;">Inicia sesión</a>
+        </p>
+    </div>
+</main>
+<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>
