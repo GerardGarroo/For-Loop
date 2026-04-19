@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Inicio')}"></head>
+<body style="margin:0;padding:0;min-height:100vh;display:flex;flex-direction:column;">
+
+<main style="flex:1;position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+
+    <!-- Imagen hero -->
+    <img th:src="@{/images/hero.png}"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;"/>
+
+    <!-- Overlay oscuro -->
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,4,18,0.75) 100%);z-index:1;"></div>
+
+    <!-- Contenido -->
+    <div style="position:relative;z-index:2;text-align:center;padding:40px;">
+        <div style="font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:16px;">
+            Bienvenido a
+        </div>
+        <div style="font-size:64px;font-weight:700;color:#ffffff;line-height:1;margin-bottom:8px;letter-spacing:-1px;">
+            ¡AtV!
+        </div>
+        <div style="font-size:18px;font-weight:400;color:rgba(255,255,255,0.75);margin-bottom:48px;">
+            ¡Alquila tus vehículos!
+        </div>
+        <a th:href="@{/vehiculos}"
+           style="display:inline-flex;align-items:center;gap:8px;background:#22827D;color:#fff;font-family:'Noto Sans',sans-serif;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;transition:background .15s;">
+            Entrar
+        </a>
+    </div>
+
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

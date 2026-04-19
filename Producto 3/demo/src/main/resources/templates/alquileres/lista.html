@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Alquileres')}"></head>
+<body class="page">
+
+<div th:replace="~{fragments/layout :: navbar}" th:with="activePage='alquileres'"></div>
+
+<main class="main">
+    <div class="page-header">
+        <div>
+            <div class="page-title">Alquileres</div>
+            <div class="page-subtitle">Estado de los alquileres actuales e historial</div>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;">
+        <div class="form-card" style="border-left:3px solid var(--accent);">
+            <div class="form-card-body">
+                <div class="td-secondary">Activos</div>
+                <div style="font-size:30px;font-weight:700;" th:text="${activos}">0</div>
+                <div class="td-secondary">vehículos en circulación</div>
+            </div>
+        </div>
+        <div class="form-card" style="border-left:3px solid var(--pending);">
+            <div class="form-card-body">
+                <div class="td-secondary">Pendientes</div>
+                <div style="font-size:30px;font-weight:700;" th:text="${pendientes}">0</div>
+                <div class="td-secondary">por recoger</div>
+            </div>
+        </div>
+        <div class="form-card" style="border-left:3px solid var(--divider);">
+            <div class="form-card-body">
+                <div class="td-secondary">Total alquileres</div>
+                <div style="font-size:30px;font-weight:700;" th:text="${#lists.size(alquileres)}">0</div>
+                <div class="td-secondary">registrados</div>
+            </div>
+        </div>
+        <div class="form-card" style="border-left:3px solid var(--accent);">
+            <div class="form-card-body">
+                <div class="td-secondary">Ingresos totales</div>
+                <div style="font-size:30px;font-weight:700;">
+                    <span th:text="${#lists.isEmpty(alquileres)} ? '0€' : ${#aggregates.sum(alquileres.![precioTotal]) + '€'}">0€</span>
+                </div>
+                <div class="td-secondary">acumulado</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Vehículo</th>
+                <th>Recogida</th>
+                <th>Devolución</th>
+                <th>Fechas</th>
+                <th>Total</th>
+                <th>Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="alquiler : ${alquileres}">
+                <td><strong th:text="${alquiler.cliente.nombre + ' ' + alquiler.cliente.apellidos}"></strong></td>
+                <td>
+                    <span th:text="${alquiler.vehiculo.marca + ' ' + alquiler.vehiculo.modelo}"></span>
+                    <div class="td-secondary" th:text="${alquiler.vehiculo.matricula}"></div>
+                </td>
+                <td th:text="${alquiler.sedeRecogida.nombre}"></td>
+                <td th:text="${alquiler.sedeDevolucion.nombre}"></td>
+                <td class="td-secondary" th:text="${alquiler.fechaInicio + ' – ' + alquiler.fechaFin}"></td>
+                <td><strong th:text="${alquiler.precioTotal + '€'}"></strong></td>
+                <td>
+                        <span th:class="${alquiler.estado.name() == 'ACTIVO'} ? 'badge badge-success' :
+                                        (${alquiler.estado.name() == 'PENDIENTE'} ? 'badge badge-pending' :
+                                        (${alquiler.estado.name() == 'CANCELADO'} ? 'badge badge-danger' : 'badge badge-neutral'))"
+                              th:text="${alquiler.estado}">
+                        </span>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(alquileres)}">
+                <td colspan="7" style="text-align:center;color:var(--text-secondary);padding:40px;">
+                    No hay alquileres registrados
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

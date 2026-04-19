@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Registro')}"></head>
+<body style="margin:0;padding:0;min-height:100vh;display:flex;flex-direction:column;">
+
+<main style="flex:1;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:40px;">
+    <div style="background:var(--bg-section);border:1px solid var(--divider);border-radius:16px;padding:40px;width:480px;">
+        <div style="font-size:22px;font-weight:700;color:var(--text-main);margin-bottom:4px;">¡AtV!</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:32px;">Crea tu cuenta para empezar a alquilar</div>
+
+        <form th:action="@{/registro}" th:object="${cliente}" method="post"
+              style="display:flex;flex-direction:column;gap:16px;">
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                    <label style="font-size:14px;font-weight:500;">Nombre</label>
+                    <input type="text" th:field="*{nombre}" placeholder="María"
+                           style="font-family:'Noto Sans',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--divider);border-radius:8px;background:var(--bg-section);color:var(--text-main);outline:none;"/>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                    <label style="font-size:14px;font-weight:500;">Apellidos</label>
+                    <input type="text" th:field="*{apellidos}" placeholder="García López"
+                           style="font-family:'Noto Sans',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--divider);border-radius:8px;background:var(--bg-section);color:var(--text-main);outline:none;"/>
+                </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:14px;font-weight:500;">DNI</label>
+                <input type="text" th:field="*{dni}" placeholder="12345678A"
+                       style="font-family:'Noto Sans',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--divider);border-radius:8px;background:var(--bg-section);color:var(--text-main);outline:none;"/>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:14px;font-weight:500;">Email</label>
+                <input type="email" th:field="*{email}" placeholder="tu@email.com"
+                       style="font-family:'Noto Sans',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--divider);border-radius:8px;background:var(--bg-section);color:var(--text-main);outline:none;"/>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:14px;font-weight:500;">Teléfono</label>
+                <input type="tel" th:field="*{telefono}" placeholder="+34 600 000 000"
+                       style="font-family:'Noto Sans',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--divider);border-radius:8px;background:var(--bg-section);color:var(--text-main);outline:none;"/>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:14px;font-weight:500;">Contraseña</label>
+                <input type="password" th:field="*{password}" placeholder="Mínimo 8 caracteres"
+                       style="font-family:'Noto Sans',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--divider);border-radius:8px;background:var(--bg-section);color:var(--text-main);outline:none;"/>
+            </div>
+
+            <button type="submit"
+                    style="background:var(--accent);color:#fff;font-family:'Noto Sans',sans-serif;font-size:14px;font-weight:500;padding:11px;border:none;border-radius:8px;cursor:pointer;">
+                Crear cuenta
+            </button>
+            <div style="text-align:center;font-size:13px;color:var(--text-secondary);">
+                ¿Ya tienes cuenta? <a th:href="@{/login}" style="color:var(--accent);font-weight:500;text-decoration:none;">Inicia sesión</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

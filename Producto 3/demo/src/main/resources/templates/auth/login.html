@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Login')}"></head>
+<body style="margin:0;padding:0;min-height:100vh;display:flex;flex-direction:column;">
+
+<main style="flex:1;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:40px;">
+    <div style="background:var(--bg-section);border:1px solid var(--divider);border-radius:16px;padding:40px;width:420px;">
+        <div style="font-size:22px;font-weight:700;color:var(--text-main);margin-bottom:4px;">¡AtV!</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:32px;">Inicia sesión para continuar</div>
+
+        <div th:if="${param.error}"
+             style="background:rgba(246,86,81,0.1);border:1px solid rgba(246,86,81,0.3);border-radius:8px;padding:10px 14px;font-size:13px;color:#c0302c;margin-bottom:16px;">
+            Email o contraseña incorrectos
+        </div>
+
+        <div th:if="${param.logout}"
+             style="background:rgba(34,130,125,0.1);border:1px solid rgba(34,130,125,0.3);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--accent);margin-bottom:16px;">
+            Has cerrado sesión correctamente
+        </div>
+
+        <form th:action="@{/login}" method="post" style="display:flex;flex-direction:column;gap:16px;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:14px;font-weight:500;">Email</label>
+                <input type="email" name="username" placeholder="tu@email.com"
+                       style="font-family:'Noto Sans',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--divider);border-radius:8px;background:var(--bg-section);color:var(--text-main);outline:none;"/>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:14px;font-weight:500;">Contraseña</label>
+                <input type="password" name="password" placeholder="••••••••"
+                       style="font-family:'Noto Sans',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--divider);border-radius:8px;background:var(--bg-section);color:var(--text-main);outline:none;"/>
+            </div>
+            <button type="submit"
+                    style="background:var(--accent);color:#fff;font-family:'Noto Sans',sans-serif;font-size:14px;font-weight:500;padding:11px;border:none;border-radius:8px;cursor:pointer;">
+                Iniciar sesión
+            </button>
+            <div style="text-align:center;font-size:13px;color:var(--text-secondary);">
+                ¿No tienes cuenta? <a th:href="@{/registro}" style="color:var(--accent);font-weight:500;text-decoration:none;">Regístrate</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>
