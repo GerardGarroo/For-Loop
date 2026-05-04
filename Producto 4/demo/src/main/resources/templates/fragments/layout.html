@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${title}">AlquilaTusVehiculos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+</head>
+<body>
+
+<nav th:fragment="navbar" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <header class="header">
+        <div class="logo">¡AtV!<span class="logo-sub">¡Alquila tus vehículos!</span></div>
+        <nav class="nav">
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin/vehiculos}" th:classappend="${activePage == 'vehiculos'} ? 'active'">Vehículos</a>
+                <a th:href="@{/clientes}" th:classappend="${activePage == 'clientes'} ? 'active'">Clientes</a>
+                <a th:href="@{/sedes}" th:classappend="${activePage == 'sedes'} ? 'active'">Sedes</a>
+                <a th:href="@{/alquileres}" th:classappend="${activePage == 'alquileres'} ? 'active'">Alquileres</a>
+            </th:block>
+
+            <th:block sec:authorize="hasRole('USER')">
+                <a th:href="@{/vehiculos}" th:classappend="${activePage == 'vehiculos'} ? 'active'">Vehículos</a>
+                <a th:href="@{/user/mis-alquileres}" th:classappend="${activePage == 'mis-alquileres'} ? 'active'">Mis alquileres</a>
+            </th:block>
+        </nav>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:13px;color:var(--text-secondary);" sec:authentication="name">Usuario</span>
+            <form th:action="@{/logout}" method="post" style="margin:0;">
+                <button type="submit" class="btn btn-outline btn-sm">Cerrar sesión</button>
+            </form>
+        </div>
+    </header>
+</nav>
+
+<footer th:fragment="footer">
+    <div class="footer">
+        <span>@For-loop *2026</span>
+    </div>
+</footer>
+
+</body>
+</html>
